@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Fontisto from '@expo/vector-icons/Fontisto';
-import { Welcome } from '../components';
+import { Headings, Welcome } from '../components';
 import homeStyles from './styles/home.style';
+import Carousel from '../components/Carousel';
+import ProductRow from '../components/products/ProductRow';
 
 const HomeScreen = () => {
     return (
@@ -23,6 +25,9 @@ const HomeScreen = () => {
                 </View>
             </View>
             <Welcome />
+            <Carousel />
+            <Headings />
+            <ProductRow />
         </SafeAreaView>
     );
 }
