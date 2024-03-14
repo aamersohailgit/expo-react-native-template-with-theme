@@ -5,6 +5,10 @@ import { useCallback } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 import { CartScreen } from './src/screens';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'."]);
+
 
 const Stack = createNativeStackNavigator();
 
