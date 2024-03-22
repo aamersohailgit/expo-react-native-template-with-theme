@@ -1,50 +1,28 @@
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { Provider as PaperProvider, Title } from 'react-native-paper';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import BottomTabNavigation from './src/navigation/BottomTabNavigation';
-import { CartScreen } from './src/screens';
-import { LogBox } from 'react-native';
-
-LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'."]);
-
-
-const Stack = createNativeStackNavigator();
+import { BottomTabNavigator } from './src/navigation/BottomTabNavigator';
+import { theme } from './theme/theme';
+import { customTheme } from './constants/theme';
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    'regular': require('./assets/fonts/Poppins-Regular.ttf'),
-    'bold': require('./assets/fonts/Poppins-Bold.ttf'),
-    'light': require('./assets/fonts/Poppins-Light.ttf'),
-    'medium': require('./assets/fonts/Poppins-Medium.ttf'),
-    'semiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
-    'extraBold': require('./assets/fonts/Poppins-ExtraBold.ttf'),
-
-  });
-
-
-  const onLayoutRootView = useCallback(async () => {
-    await SplashScreen.hideAsync();
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Bottom Navigation"
-          component={BottomTabNavigation}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Cart"
-          component={CartScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <PaperProvider>
+      <StatusBar style="auto" />
+          <NavigationContainer>
+                <BottomTabNavigator />
+          </NavigationContainer>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }
 
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+});
